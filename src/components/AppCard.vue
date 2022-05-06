@@ -24,7 +24,8 @@ export default {
   cursor: pointer;
   transition: transform 0.5s;
   &:hover {
-    filter: invert(0.1);
+    background-color: lighten($header-bg-color, 10%);
+    // filter: invert(0.1);
     transform: scale(1.1);
   }
   div {
