@@ -21,6 +21,12 @@ export default {
 #album-card {
   background-color: $header-bg-color;
   width: 200px;
+  cursor: pointer;
+  transition: transform 0.5s;
+  &:hover {
+    filter: invert(0.1);
+    transform: scale(1.1);
+  }
   div {
     padding: 20px 0;
     h6 {
