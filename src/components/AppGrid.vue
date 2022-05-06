@@ -3,6 +3,7 @@
     id="main-grid"
     class="container d-flex justify-content-center align-items-center"
   >
+    <app-loader v-if="loading" />
     <div class="row d-flex justify-content-center my-5">
       <div
         v-for="album in albums"
@@ -22,13 +23,13 @@
 </template>
 
 <script>
-// import AppLoader from "./AppLoader.vue";
+import AppLoader from "./AppLoader.vue";
 import axios from "axios";
 import AppCard from "./AppCard.vue";
 export default {
   name: "AppGrid",
   components: {
-    // AppLoader,
+    AppLoader,
     AppCard,
   },
   data() {
@@ -40,18 +41,20 @@ export default {
   },
   mounted() {
     this.loading = true;
-    axios
-      .get(this.apiPath + "music")
-      .then((res) => {
-        // console.log(res);
-        this.albums = res.data.response;
-        console.log(this.albums);
-        this.loading = false;
-      })
-      .catch((error) => {
-        console.log(error);
-        this.loading = false;
-      });
+    setTimeout(() => {
+      axios
+        .get(this.apiPath + "music")
+        .then((res) => {
+          // console.log(res);
+          this.albums = res.data.response;
+          console.log(this.albums);
+          this.loading = false;
+        })
+        .catch((error) => {
+          console.log(error);
+          this.loading = false;
+        });
+    }, 2000);
   },
   props: {},
 };
