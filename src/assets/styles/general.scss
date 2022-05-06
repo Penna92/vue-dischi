@@ -2,10 +2,13 @@
 @import "~bootstrap/scss/bootstrap.scss"; // così si importa un file dai node modules
 
 //Font
+@import "~@fontsource/open-sans/index.css";
+@import "~@fontsource/open-sans/700.css";
 
 //Styles
 @import "./variables.scss";
 
 body {
   background-color: $body-bg-color;
+  font-family: $main-font;
 }
