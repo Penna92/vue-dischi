@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <app-header />
+    <app-header @customChange="logChange" />
     <main>
       <app-grid />
     </main>
@@ -16,6 +16,13 @@ export default {
   components: {
     AppHeader,
     AppGrid,
+  },
+  methods: {
+    logChange(event) {
+      for (let i = 0; i < event.length; i++) {
+        console.log(event[i]);
+      }
+    },
   },
 };
 </script>
