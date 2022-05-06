@@ -7,7 +7,7 @@
     <div class="row d-flex justify-content-center my-5">
       <div
         v-for="album in albums"
-        :key="album.id"
+        :key="album.index"
         class="
           d-flex
           justify-content-center
@@ -39,6 +39,7 @@ export default {
       loading: false,
     };
   },
+
   mounted() {
     this.loading = true;
     setTimeout(() => {
