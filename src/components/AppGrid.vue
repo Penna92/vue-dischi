@@ -18,7 +18,13 @@
       :musicalArtists="artists"
     />
     <app-loader v-if="loading" />
-    <div class="row d-flex justify-content-around my-5">
+    <h3 class="my-5 text-danger" v-if="filteredList.length === 0 && !loading">
+      Nessun album corrisponde ai criteri da te selezionati
+    </h3>
+    <div
+      v-if="filteredList.length > 0"
+      class="row d-flex justify-content-around my-5"
+    >
       <div
         v-for="album in filteredList"
         :key="album.index"
@@ -58,40 +64,34 @@ export default {
       genres: [],
       artists: [],
       searchText: "",
+      searchText2: "",
+      // chosenGenre: false,
     };
   },
   methods: {
     setSearchGenre(text) {
-      // this.searchText = "";
+      // this.chosenGenre = true;
       this.searchText = text;
-      // console.log(text);
-      // reset();
     },
     setSearchArtist(text2) {
-      // this.searchText = "";
-      this.searchText = text2;
-      console.log(text2);
-      console.log(this.text);
-      // reset();
+      this.searchText2 = text2;
     },
   },
   computed: {
     filteredList() {
-      if (this.searchText === "") {
+      if (this.searchText === "" && this.searchText2 === "") {
         return this.albums;
       }
       return this.albums.filter((el) => {
-        return el.genre === this.searchText || el.author === this.searchText;
+        if (this.searchText === "" && this.searchText2 !== "") {
+          return el.genre === this.searchText || el.author === this.searchText2;
+        } else if (this.searchText !== "" && this.searchText2 === "") {
+          return el.genre === this.searchText || el.author === this.searchText2;
+        } else {
+          return el.genre === this.searchText && el.author === this.searchText2;
+        }
       });
     },
-    // filteredListArtist() {
-    //   if (this.searchText === "") {
-    //     return this.albums;
-    //   }
-    //   return this.albums.filter((el) => {
-    //     return el.author === this.searchText;
-    //   });
-    // },
   },
   mounted() {
     this.loading = true;
@@ -99,7 +99,7 @@ export default {
       axios
         .get(this.apiPath + "music")
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           this.albums = res.data.response;
           this.albums.forEach((el) => {
             if (!this.genres.includes(el.genre)) {
@@ -109,7 +109,6 @@ export default {
               this.artists.push(el.author);
             }
           });
-          // console.log(this.albums);
           this.loading = false;
         })
         .catch((error) => {

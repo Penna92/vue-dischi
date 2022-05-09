@@ -4,10 +4,10 @@
       class="form-select mt-3"
       name="artist"
       id="artist"
-      v-model="selectValue"
+      v-model="selectValue2"
       @change="searchArtist"
     >
-      <option value="">Musical Artist</option>
+      <option value="">Artist</option>
       <option :value="artist" v-for="artist in musicalArtists" :key="artist">
         {{ artist }}
       </option>
@@ -20,18 +20,18 @@ export default {
   name: "AppSelectArtist",
   data() {
     return {
-      selectValue: "",
+      selectValue2: "",
     };
   },
   props: ["musicalArtists"],
   methods: {
     searchArtist() {
-      this.$emit("searchArtist", this.selectValue);
-      //   this.selectValue = "";
+      this.$emit("searchArtist", this.selectValue2);
+      //   this.selectValue2 = "";
     },
     // reset() {
-    //   this.selectValue = "";
-    //   this.$emit("searchArtist", this.selectValue);
+    //   this.selectValue2 = "";
+    //   this.$emit("searchArtist", this.selectValue2);
     // },
   },
 };

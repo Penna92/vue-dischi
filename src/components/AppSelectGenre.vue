@@ -7,7 +7,7 @@
       v-model="selectValue"
       @change="searchGenre"
     >
-      <option value="">Musical Genre</option>
+      <option value="">Genre</option>
       <option :value="genre" v-for="genre in musicalGenres" :key="genre">
         {{ genre }}
       </option>
