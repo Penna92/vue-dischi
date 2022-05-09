@@ -1,23 +1,11 @@
 <template>
   <header class="d-flex justify-content-between align-items-center">
     <img src="../assets/logo.png" alt="Logo" />
-    <input
-      class="mx-5 h-50"
-      type="text"
-      placeholder="Filtra album"
-      @change="customChange"
-    />
   </header>
 </template>
 
 <script>
-export default {
-  methods: {
-    customChange(event) {
-      this.$emit("customChange", event.target.value);
-    },
-  },
-};
+export default {};
 </script>
 
 <style lang="scss" scoped>

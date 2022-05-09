@@ -20,7 +20,6 @@ export default {
 @import "../assets/styles/variables.scss";
 #album-card {
   background-color: $header-bg-color;
-  width: 200px;
   cursor: pointer;
   transition: transform 0.5s;
   &:hover {
@@ -29,6 +28,7 @@ export default {
     transform: scale(1.1);
   }
   div {
+    width: 100%;
     padding: 20px 0;
     h6 {
       text-transform: uppercase;
@@ -37,6 +37,7 @@ export default {
     img {
       box-shadow: 0 0 6px 3px rgba(#000, 0.15);
       width: 100%;
+      // height: 100px;
     }
     p {
       margin-bottom: 0;
