@@ -4,8 +4,8 @@
       class="form-select mt-3"
       name="genre"
       id="genre"
-      v-model="inputText"
-      @change="search"
+      v-model="selectValue"
+      @change="searchGenre"
     >
       <option value="">Musical Genre</option>
       <option :value="genre" v-for="genre in musicalGenres" :key="genre">
@@ -20,19 +20,19 @@ export default {
   name: "AppSelectGenre",
   data() {
     return {
-      inputText: "",
+      selectValue: "",
     };
   },
   props: ["musicalGenres"],
   methods: {
-    search() {
-      this.$emit("search", this.inputText);
-      //   this.inputText = "";
+    searchGenre() {
+      this.$emit("searchGenre", this.selectValue);
+      //   this.selectValue = "";
     },
-    reset() {
-      this.inputText = "";
-      this.$emit("search", this.inputText);
-    },
+    // reset() {
+    //   this.selectValue = "";
+    //   this.$emit("search", this.selectValue);
+    // },
   },
 };
 </script>

@@ -9,9 +9,16 @@
       align-items-center
     "
   >
-    <AppSelectGenre @search="setSearchGenre($event)" :musicalGenres="genres" />
+    <AppSelectGenre
+      @searchGenre="setSearchGenre($event)"
+      :musicalGenres="genres"
+    />
+    <AppSelectArtist
+      @searchArtist="setSearchArtist($event)"
+      :musicalArtists="artists"
+    />
     <app-loader v-if="loading" />
-    <div class="row d-flex justify-content-center my-5">
+    <div class="row d-flex justify-content-around my-5">
       <div
         v-for="album in filteredList"
         :key="album.index"
@@ -34,12 +41,14 @@ import AppLoader from "./AppLoader.vue";
 import axios from "axios";
 import AppCard from "./AppCard.vue";
 import AppSelectGenre from "./AppSelectGenre.vue";
+import AppSelectArtist from "./AppSelectArtist.vue";
 export default {
   name: "AppGrid",
   components: {
     AppLoader,
     AppCard,
     AppSelectGenre,
+    AppSelectArtist,
   },
   data() {
     return {
@@ -47,12 +56,23 @@ export default {
       apiPath: "https://flynn.boolean.careers/exercises/api/array/",
       loading: false,
       genres: [],
+      artists: [],
       searchText: "",
     };
   },
   methods: {
     setSearchGenre(text) {
+      // this.searchText = "";
       this.searchText = text;
+      // console.log(text);
+      // reset();
+    },
+    setSearchArtist(text2) {
+      // this.searchText = "";
+      this.searchText = text2;
+      console.log(text2);
+      console.log(this.text);
+      // reset();
     },
   },
   computed: {
@@ -61,9 +81,17 @@ export default {
         return this.albums;
       }
       return this.albums.filter((el) => {
-        return el.genre === this.searchText;
+        return el.genre === this.searchText || el.author === this.searchText;
       });
     },
+    // filteredListArtist() {
+    //   if (this.searchText === "") {
+    //     return this.albums;
+    //   }
+    //   return this.albums.filter((el) => {
+    //     return el.author === this.searchText;
+    //   });
+    // },
   },
   mounted() {
     this.loading = true;
@@ -76,6 +104,9 @@ export default {
           this.albums.forEach((el) => {
             if (!this.genres.includes(el.genre)) {
               this.genres.push(el.genre);
+            }
+            if (!this.artists.includes(el.author)) {
+              this.artists.push(el.author);
             }
           });
           // console.log(this.albums);

@@ -1,5 +1,5 @@
 <template>
-  <div id="album-card" class="container text-center">
+  <div id="album-card" class="container d-flex text-center">
     <div>
       <img class="" :src="item.poster" alt="" />
       <h6 class="my-3">{{ item.title }}</h6>
@@ -19,6 +19,8 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/styles/variables.scss";
 #album-card {
+  width: 200px;
+  min-width: 200px;
   background-color: $header-bg-color;
   cursor: pointer;
   transition: transform 0.5s;
